@@ -1,0 +1,35 @@
+networks:
+  develop:
+    external: true
+
+services:
+  quickwit:
+    image: quickwit/quickwit:latest
+    container_name: quickwit
+    ports:
+      - 7280:7280
+    volumes:
+      - ./logs:/var/log
+      - ./qwdata:/quickwit/qwdata
+    networks:
+      - develop
+    environment:
+      QUICKWIT_HOME: /qwdata
+    command: >
+      run
+    restart: always
+
+  fluent-bit:
+    image: fluent/fluent-bit:3.2.2
+    container_name: fluent-bit
+    ports:
+      - 24224:24224
+    networks:
+      - develop
+    depends_on:
+      - quickwit
+    volumes:
+      - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - ./logs/example.log:/var/log/example.log
+    command: >
+      sh -c "/fluent-bit/bin/fluent-bit -c /fluent-bit/etc/fluent-bit.conf && chmod 644 /var/log/example.log && chown fluentbit:fluentbit /var/log/example.log"

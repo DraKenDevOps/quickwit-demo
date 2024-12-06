@@ -1,6 +1,6 @@
 version: 0.8
 
-index_id: fluentbit-logs
+index_id: fluentbit
 
 doc_mapping:
   mode: dynamic
@@ -11,6 +11,12 @@ doc_mapping:
         - unix_timestamp
       output_format: unix_timestamp_secs
       fast: true
+    - name: dt
+      type: datetime
+      fast: true
+      input_formats:
+        - rfc3339
+      fast_precision: seconds
   timestamp_field: timestamp
 
 indexing_settings:

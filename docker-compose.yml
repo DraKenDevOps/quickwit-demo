@@ -23,6 +23,7 @@ services:
     image: fluent/fluent-bit:latest
     container_name: fluent-bit
     ports:
+      - 2020:2020
       - 24224:24224
     networks:
       - develop

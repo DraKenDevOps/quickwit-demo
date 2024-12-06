@@ -20,7 +20,7 @@ services:
     restart: always
 
   fluent-bit:
-    image: fluent/fluent-bit:3.2.2
+    image: fluent/fluent-bit:latest
     container_name: fluent-bit
     ports:
       - 24224:24224
@@ -32,4 +32,6 @@ services:
       - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
       - ./logs/example.log:/var/log/example.log
     command: >
-      sh -c "/fluent-bit/bin/fluent-bit -c /fluent-bit/etc/fluent-bit.conf && chmod 644 /var/log/example.log && chown fluentbit:fluentbit /var/log/example.log"
+      /fluent-bit/bin/fluent-bit -c /fluent-bit/etc/fluent-bit.conf && chmod 644 /var/log/example.log && chown fluentbit:fluentbit /var/log/example.log
+    # command: >
+    #   sh -c "/fluent-bit/bin/fluent-bit -c /fluent-bit/etc/fluent-bit.conf && chmod 644 /var/log/example.log && chown fluentbit:fluentbit /var/log/example.log"

@@ -7,6 +7,7 @@ https://quickwit.io/docs/get-started/quickstart
   ```
 ## Log collector using FluentBit
 https://docs.fluentbit.io/manual/installation/docker
+<br>
 https://quickwit.io/docs/log-management/send-logs/using-fluentbit
 * Run fluent-bit via Docker:
   ```
